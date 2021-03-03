@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Admin</h5>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="fas fa-user-lock"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#!">View Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
+        <div class="card p-2">
+            <div class="profile-photo text-center mt-2">
+                <img src="{{ user.image.url }}" class="img-fluid" alt="Responsive image">
+            </div>
+            <h5 class="text-center">{{ user.fullname }}</h5>
+        </div>
+
+    </div>
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30">
+        <div class="card p-3">
+            <h5 class="mt-1">View Profile</h5>
+            <hr>
+            <form>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Fullname</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control"  value="{{ user.fullname }}" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="inputEmail3" value="{{ user.email }}" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-3 col-form-label">Phone No</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputEmail3" value="{{ user.phone_no }}" readonly>
+                    </div>
+                </div>
+        
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

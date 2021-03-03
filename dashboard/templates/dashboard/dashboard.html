@@ -1,0 +1,184 @@
+{% extends request.user.is_admin|yesno:'base.html,doctors/doctor_base.html' %}
+{% load static %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+<!-- [ breadcrumb ] start -->
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Dashboard Analytics</h5>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'dashboard' %}"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#!">Dashboard Analytics</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ breadcrumb ] end -->
+<!-- [ Main Content ] start -->
+<div class="row">
+    <!-- support-section start -->
+    <div class="col-md-6">
+        <div class="card support-bar overflow-hidden">
+            <div class="card-body pb-0">
+                <h2 class="m-0">{{ query.count }}</h2>
+                <span class="text-c-blue">Queries</span>
+                <p class="mb-3 mt-3">Total number of queries that came in.</p>
+            </div>
+            <!-- <div id="support-chart"></div> -->
+            <div class="card-footer bg-primary text-white">
+                <div class="row text-center">
+                    <div class="col">
+                        <h4 class="m-0 text-white">{{ qaccepted }}</h4>
+                        <span>Accepted</span>
+                    </div>
+                    <div class="col">
+                        <h4 class="m-0 text-white">{{ qbooked }}</h4>
+                        <span>Booked</span>
+                    </div>
+                    <div class="col">
+                        <h4 class="m-0 text-white">{{ qsettled }}</h4>
+                        <span>Settled</span>
+                    </div>
+                    <div class="col">
+                        <h4 class="m-0 text-white">{{ qcancelled }}</h4>
+                        <span>Cancelled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card support-bar overflow-hidden">
+            <div class="card-body pb-0">
+                <h2 class="m-0">{{ appointment.count }}</h2>
+                <span class="text-c-green">Appointments</span>
+                <p class="mb-3 mt-3">Total number of appointments that came in.</p>
+            </div>
+            <!-- <div id="support-chart1"></div> -->
+            <div class="card-footer bg-success text-white">
+                <div class="row text-center">
+                    <!-- <div class="col">
+                        <h4 class="m-0 text-white">{{ arunning }}</h4>
+                        <span>Running</span>
+                    </div> -->
+                    <div class="col">
+                        <h4 class="m-0 text-white">{{ abooked }}</h4>
+                        <span>Booked</span>
+                    </div>
+                    <div class="col">
+                        <h4 class="m-0 text-white">{{ asettled }}</h4>
+                        <span>Settled</span>
+                    </div>
+                    
+                    <div class="col">
+                        <h4 class="m-0 text-white">{{ acancelled }}</h4>
+                        <span>Cancelled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- support-section end -->
+
+    <!-- page statustic card start -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <h4 class="text-c-yellow">{{ doctors.count }}</h4>
+                        <h6 class="text-muted m-b-0">Total Dieticians</h6>
+                    </div>
+                    <div class="col-4 text-right">
+                        <i class="fas fa-user-md f-28"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <h4 class="text-c-green">{{ teiders.count }}</h4>
+                        <h6 class="text-muted m-b-0">Total Tieders</h6>
+                    </div>
+                    <div class="col-4 text-right">
+                        <i class="fas fa-user f-28"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- seo end -->
+
+    <!-- Latest Customers start -->
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card table-card review-card">
+                <div class="card-header borderless ">
+                    <h5>Queries</h5>
+                    <div class="card-header-right">
+                        <div class="btn-group card-option">
+                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="feather icon-more-horizontal"></i>
+                            </button>
+                            <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                                <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                                <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" id="">
+                            <thead>
+                                <tr>
+                                    <th>Teider</th>
+                                    <th>Dietician</th>
+                                    <th>Category</th>
+                                    <th>Question</th>
+                                    <th>Session Type</th>
+                                    <th>Session Time</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for query in query %}
+                                <tr>
+                                    <td>{{ query.teider }}</td>
+                                    <td>{{ query.doctor }}</td>
+                                    <td>{{ query.category }}</td>
+                                    <td>{{ query.question }}</td>
+                                    <td>{{ query.session_type }}</td>
+                                    <td>{{ query.session_time }}</td>
+                                    <td>{{ query.price }}</td>
+                                    <td><span class="badge  badge-success">{{ query.status }}</span></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Latest Customers end -->
+</div>
+        <!-- [ Main Content ] end -->
+{% endblock  %}

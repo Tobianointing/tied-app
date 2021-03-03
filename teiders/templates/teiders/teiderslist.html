@@ -1,0 +1,67 @@
+{% extends request.user.is_admin|yesno:'base.html,doctors/doctor_base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Teiders</h5>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="?module=teiders&page=teiders"><i class="fas fa-user-md"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#!">Teiders</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header borderless ">
+                <h5>Teiders</h5>
+                <a href="{% url 'create-teiders' %}" class="btn btn-primary float-right">Add Teider</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered" id="teiders">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th class="">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for teider in teiders %}
+                            <tr>
+                                <td>{{ teider.id }}</td>
+                                <td>{{ teider.fullname }}</td>
+                                <td>{{ teider.email }}</td>
+                                <td>{{ teider.phone_no }}</td>
+                                <td class="">
+                                    <div class="btn-group card-option">
+                                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-Edited="false">
+                                            <i class="feather icon-more-horizontal"></i>
+                                        </button>
+                                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                            <li class="dropdown-item"><a href="{% url 'teider-detail' teider.email %}">View</a></li>
+                                            <li class="dropdown-item"><a href="{% url 'teider-update' teider.id %}"><span>Edit</span></a></li>
+                                            <li class="dropdown-item"><a href="{% url 'teider-delete' teider.id %}"> Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}
+

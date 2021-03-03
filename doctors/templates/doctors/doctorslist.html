@@ -1,0 +1,67 @@
+{% extends request.user.is_admin|yesno:'base.html,doctors/doctor_base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Doctors</h5>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="?module=doctors&page=doctors"><i class="fas fa-user-md"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#!">Doctors</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header borderless ">
+                <h5>Doctors</h5>
+                <a href="{% url 'create-doctors' %}" class="btn btn-primary float-right">Add Doctor</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered" id="doctors">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th class="">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for doctor in doctors %}
+                            <tr>
+                                <td>{{ doctor.id }}</td>
+                                <td>{{ doctor.fullname }}</td>
+                                <td>{{ doctor.email }}</td>
+                                <td>{{ doctor.phone_no }}</td>
+                                <td class="">
+                                    <div class="btn-group card-option">
+                                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-Edited="false">
+                                            <i class="feather icon-more-horizontal"></i>
+                                        </button>
+                                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                            <li class="dropdown-item"><a href="{% url 'doctor-detail' doctor.email %}">View</a></li>
+                                            <li class="dropdown-item"><a href="{% url 'doctor-update' doctor.id %}"><span>Edit</span></a></li>
+                                            <li class="dropdown-item"><a href="{% url 'doctor-delete' doctor.id %}"> Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}
+

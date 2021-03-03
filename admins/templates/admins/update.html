@@ -1,0 +1,43 @@
+{% extends request.user.is_admin|yesno:'base.html,doctors/doctor_base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Admin</h5>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="fas fa-user-lock"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#!">Edit Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-30">
+        <div class="card p-3">
+            <h5 class="mt-1">Edit Profile</h5>
+            <hr>
+            <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                {% for field in form.visible_fields %}
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">{{ field.label }}</label>
+                    <div class="col-sm-9">
+                        {{ field }}
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="form-group row mt-2">
+                    <div class="col-sm-12 mt-3">
+                        <button type="submit" class="btn  btn-primary">Update profile</button>
+                        <!-- <button type="submit" class="btn  btn-danger float-right">Delete profile</button> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

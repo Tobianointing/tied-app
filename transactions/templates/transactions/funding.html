@@ -1,0 +1,56 @@
+{% extends request.user.is_admin|yesno:'base.html,doctors/doctor_base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Wallet Fundings</h5>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="?module=transactions&page=wallet_fundings"><i class="fas fa-wallet"></i></a></li>
+                    <li class="breadcrumb-item"><a href="?module=transactions&page=wallet_fundings">Wallet Fundings</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header borderless ">
+                <h5>Wallet Fundings</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered" id="queries">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>User</th>
+                                <th>Full Name</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fund in funding %}
+                            <tr>
+                                <td>{{ fund.date }}</td>
+                                <td>{{ fund.user_type }}</td>
+                                <td>{{ fund.fullname }}</td>
+                                <td>{{ fund.amount }}</td>
+                                <td>{{ fund.method }}</td>
+                                <td><span class="badge badge-success">{{ fund.status }}</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
