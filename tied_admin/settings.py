@@ -89,12 +89,15 @@ WSGI_APPLICATION = 'tied_admin.wsgi.application'
 
 DATABASES = {
 'default': {
-'ENGINE': 'django.db.backends.postgresql_psycopg2',
-'NAME': 'postgres',
-'USER': str(os.getenv('DB_USER')),
-'PASSWORD': str(os.getenv('DB_PASSWORD')),
-'HOST': 'localhost',
-'PORT': '5432',
+'ENGINE': 'django.db.backends.mysql',
+'NAME': 'teid_db',
+'USER': 'root',
+'PASSWORD': "",
+'HOST': "",
+'PORT': "",
+'OPTIONS': {
+'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+}
 }
 }
 
