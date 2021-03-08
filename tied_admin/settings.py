@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -88,18 +88,16 @@ WSGI_APPLICATION = 'tied_admin.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-'default': {
-'ENGINE': 'django.db.backends.mysql',
-'NAME': 'teid_db',
-'USER': 'root',
-'PASSWORD': "",
-'HOST': "",
-'PORT': "",
-'OPTIONS': {
-'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+"default": {
+"ENGINE": "django.db.backends.postgresql_psycopg2",
+"NAME": "postgres",
+"USER": "postgres",
+"PASSWORD": "Tobi1999",
+"HOST": "localhost",
+"PORT": "",
 }
 }
-}
+
 
 
 # Password validation
