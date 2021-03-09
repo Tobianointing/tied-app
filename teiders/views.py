@@ -50,8 +50,8 @@ def teiddetail(request, email):
     teider = User.objects.get(email=email)
     funding = WalletFunding.objects.filter(email=email)
     withdraw = WalletWithdrawal.objects.filter(email=email)
-    query = Query.objects.filter(email=email)
-    appointment = Appointment.objects.filter(email=email)   
+    query = Query.objects.filter(teider=teider.id)
+    appointment = Appointment.objects.filter(teider=teider.id)   
 
     transactions = list(chain(funding, withdraw))
     histories =  list(chain(query, appointment))
