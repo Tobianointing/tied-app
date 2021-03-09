@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+from cloudinary.models import CloudinaryField
+from cloudinary import CloudinaryImage
 
 class User(AbstractUser):
     USERNAME_FIELD = 'email'
@@ -10,7 +12,7 @@ class User(AbstractUser):
     username = models.CharField(max_length=50)
     phone_no = models.CharField(max_length=50)
     email = models.EmailField(max_length=254, unique=True)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pic')    
+    image = CloudinaryField('teid_pics')    
     is_doctor = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_teider = models.BooleanField(default=False)

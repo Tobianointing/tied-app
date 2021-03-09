@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import django_heroku
+import cloudinary
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -37,6 +38,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     # 'whitenoise.runserver_nostatic',
+    'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -160,6 +162,10 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = str(os.getenv('EMAIL_HOST_USER'))
 EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))
 
-
+cloudinary.config( 
+  cloud_name = "comepair", 
+  api_key = "745447217137673", 
+  api_secret = "QsrWfPDmQIg5ACtGeV1_IqSYPiA" 
+)
 
 django_heroku.settings(locals())
