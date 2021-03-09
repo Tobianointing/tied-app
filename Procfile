@@ -1,0 +1,1 @@
+web: gunicorn tied_admin.wsgi 
