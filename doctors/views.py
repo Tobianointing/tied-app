@@ -216,8 +216,11 @@ def cancel_appointment(request, id):
 
 def doctor_signup(request):
     if request.method == 'POST':
-        form = DoctorSignUpForm(request.POST)
+        form = DoctorSignUpForm(request.POST, request.FILES)
+        print(form.data)
+        
         if form.is_valid():
+            print(form.data)
             form.save()
             return redirect('admins:login')
     else:

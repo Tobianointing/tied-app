@@ -6,7 +6,17 @@ from users.models import User
 
 from django.db import transaction
 
+from cloudinary.forms import CloudinaryFileField
+
 class DoctorSignUpForm(UserCreationForm):
+    image = CloudinaryFileField(
+        options = {
+            'crop': 'thumb',
+            'width': 200,
+            'height': 200,
+            'folder': 'doctor_pics'
+       }
+    )
     discipline = forms.CharField()
 
     class Meta(UserCreationForm.Meta):

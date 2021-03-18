@@ -1,22 +1,19 @@
-"""tied_admin URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+
+from viewsets import viewsets
+
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('api/v1/users', viewsets.UserViewSet, basename='user')
+router.register('api/v1/doctors', viewsets.DoctorViewSet)
+router.register('api/v1/appointments', viewsets.AppointmentViewSet)
+router.register('api/v1/queries', viewsets.QueryViewSet)
+router.register('api/v1/wf', viewsets.WFViewSet)
+router.register('api/v1/ww', viewsets.WWViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +26,10 @@ urlpatterns = [
     path('conversations/', include('conversations.urls')),
     path('', include('admins.urls')),
     path('', include('users.urls')),
+
+    #drf urls
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
 if settings.DEBUG:

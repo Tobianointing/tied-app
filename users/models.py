@@ -12,7 +12,7 @@ class User(AbstractUser):
     username = models.CharField(max_length=50)
     phone_no = models.CharField(max_length=50)
     email = models.EmailField(max_length=254, unique=True)
-    image = CloudinaryField('teid_pics')    
+    image = CloudinaryField('image')    
     is_doctor = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_teider = models.BooleanField(default=False)

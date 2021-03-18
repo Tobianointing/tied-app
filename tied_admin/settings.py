@@ -38,13 +38,19 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     # 'whitenoise.runserver_nostatic',
+    
+    #3rd party app
     'cloudinary',
+    'rest_framework',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    #local app
     'dashboard',
     'teiders',
     'doctors',
@@ -92,16 +98,32 @@ WSGI_APPLICATION = 'tied_admin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+#mysql
 DATABASES = {
-"default": {
-"ENGINE": "django.db.backends.postgresql_psycopg2",
-"NAME": "postgres",
-"USER": "postgres",
-"PASSWORD": "Tobi1999",
-"HOST": "localhost",
-"PORT": "",
+'default': {
+'ENGINE': 'django.db.backends.mysql',
+'NAME': 'teid_db',
+'USER': 'root',
+'PASSWORD':"",
+'HOST':"",
+'PORT':"",
+'OPTIONS': {
+'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
 }
 }
+}
+
+#postgress
+# DATABASES = {
+# "default": {
+# "ENGINE": "django.db.backends.postgresql_psycopg2",
+# "NAME": "postgres",
+# "USER": "postgres",
+# "PASSWORD": "Tobi1999",
+# "HOST": "localhost",
+# "PORT": "",
+# }
+# }
 
 
 
@@ -169,3 +191,9 @@ cloudinary.config(
 )
 
 django_heroku.settings(locals())
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}

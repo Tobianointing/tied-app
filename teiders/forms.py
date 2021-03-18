@@ -9,18 +9,18 @@ from users.models import User
 
 from django.db import transaction
 
-  
-  
-# class TeiderForm(forms.ModelForm):  
-#     class Meta:  
-#         model = TeiderModel  
-#         fields = "__all__"  
-
-    
-
+from cloudinary.forms import CloudinaryFileField
+ 
 
 class TeiderSignUpForm(UserCreationForm):
-
+    image = CloudinaryFileField(
+        options = {
+            'crop': 'thumb',
+            'width': 200,
+            'height': 200,
+            'folder': 'teider_pics'
+       }
+    )
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ['fullname', 'email', 'phone_no', 'image', 'password1', 'password2']

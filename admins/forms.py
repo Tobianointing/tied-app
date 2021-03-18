@@ -4,6 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 # from .models import  Profile
 from users.models import User
 
+from cloudinary.forms import CloudinaryFileField
+
 # class AdminsForm(UserCreationForm):
 #     email = forms.EmailField()
 #     class Meta:
@@ -28,6 +30,14 @@ from users.models import User
 
 
 class AdminSignUpForm(UserCreationForm):
+    image = CloudinaryFileField(
+        options = {
+            'crop': 'thumb',
+            'width': 200,
+            'height': 200,
+            'folder': 'admin_pics'
+       }
+    )
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ['fullname', 'email', 'phone_no', 'image', 'password1', 'password2']
